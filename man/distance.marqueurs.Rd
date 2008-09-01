@@ -5,7 +5,7 @@
 \title{distance of markers}
 
 \description{
-The function gives the distance of each marker compared to the first marker.
+The function gives the distance of each marker to the first marker.
 It can be viewed as an internal function. 
 The user does not have to call it by himself.
 }
@@ -20,12 +20,17 @@ between two consecutive markers on all the chromosome.}
 }
 
 \value{
-the value returned is a numeric vector of length=number of markers containing the positions of each marker compared to the first marker.
+the returned   valueis a numeric vector of length=number of markers containing the positions of each marker from the beginning of the chromosome.
 }
 
-\references{publication to be submitted:C.Cierco-Ayrolles,S.Dejean,A.Legarra,H.Gilbert,
-T.Druet,F.Ytournel,D.Estivals,N.Oumouhou and B.Mangin,
+
+
+\references{publication to be submitted: C. Cierco-Ayrolles, S. Dejean, A. Legarra, H. Gilbert,
+T. Druet, F. Ytournel, D. Estivals, N. Oumouhou and B. Mangin.
 Combining linkage analysis and linkage disequilibrium for QTL fine mapping in animal pedigrees.}
+
+
+
 
 \author{S. Dejean, N. Oumouhou, D. Estivals, B. Mangin }
 

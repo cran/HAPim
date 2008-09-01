@@ -1,32 +1,32 @@
 `hapim.LDL.add` <-
 function(hap.chrom1.pere,hap.chrom2.pere,hap.trans.mere,perf,CD,genea,PLA,map,position,temps.depart,perfectLD,marq.hap.left){
 
-if (perfectLD!=TRUE) stop("error",call.=FALSE) 
 
-# rangement de perf,CD,PLA,hap.trans.mere,hap.chrom1.pere,hap.chrom2.pere en fonction de l'index des pères (2nde colonne de genea)
+# vérification des dimensions:
+############################
+     if(dim(hap.trans.mere)[2] != dim(hap.chrom1.pere)[2] |  dim(hap.chrom1.pere)[2] != dim(hap.chrom2.pere)[2] | dim(hap.chrom2.pere)[2] != (length(map)+1) ) stop("the numbers of genotype information are not consistent in  hap.trans.mere, hap.chrom1.pere, hap.chrom2.pere or map ",call.=FALSE)
+
+     if(length(CD) != length(perf) | length(perf) != dim(genea)[1] | dim(genea)[1] != dim(PLA)[1] | dim(PLA)[1] != dim(hap.trans.mere)[1]) stop("the numbers of half-sib information are not consistent in CD, perf, genea, PLA or hap.trans.mere",call.=FALSE)
+
+     if(dim(hap.chrom1.pere)[1] != dim(hap.chrom2.pere)[1] | dim(hap.chrom2.pere)[1] != length(unique(genea[,2])))  stop("the numbers of sire information are not consistent in hap.chrom1.pere, hap.chrom2.pere or unique(genea[,2]) ",call.=FALSE)
+
+     if  (dim(PLA)[2]!=length(position)) stop("the number of columns in PLA is not consistent with the number of test positions",call.=FALSE)
+
+
+# rangement de perf, CD, PLA, hap.trans.mere, hap.chrom1.pere, hap.chrom2.pere en fonction de l'index des pères (2nde colonne de genea)
 ##################################################################################################################################
-#on range perf et CD en fonction de l'index des pères
-	temp=cbind(genea,perf,CD)
-	a=temp[order(temp[,2]),]
-	genea=a[,1:2]
-	perf=a[,3]
-	CD=a[,4]
-
-#on range hap.trans.mere en fonction de l'index des pères
-	temp2=cbind(genea,hap.trans.mere)
-	a2=temp2[order(temp2[,2]),]
-	hap.trans.mere=a2[,-c(1:2)]
-
-#on range hap.chrom1.pere en fonction de l'index des pères
-	genea.unique=unique(temp[,2])
-	temp3=cbind(genea.unique,hap.chrom1.pere)
-	a3=temp3[order(temp3[,1]),]
-	hap.chrom1.pere=a3[,-1]
-
-#on range hap.chrom2.pere en fonction de l'index des pères
-	temp4=cbind(genea.unique,hap.chrom2.pere)
-	a4=temp4[order(temp4[,1]),]
-	hap.chrom2.pere=a4[,-1]
+#on range perf, CD, PLA et hap.trans.mere en fonction de l'index des pères
+	ord.fils=order(genea[,2])
+        perf=perf[ord.fils]
+        CD=CD[ord.fils]
+        hap.trans.mere=hap.trans.mere[ord.fils,]
+        PLA=PLA[ord.fils,]
+#on range hap.chrom1.pere et hap.chrom2.pere en fonction de l'index des pères
+	ord.pere=order(unique(genea[,2]))
+        hap.chrom1.pere=hap.chrom1.pere[ord.pere,]
+	hap.chrom2.pere=hap.chrom2.pere[ord.pere,]
+#on range genea
+        genea=genea[ord.fils,]
 
 # recodage des haplotypes
 #########################
@@ -52,33 +52,28 @@ if (perfectLD!=TRUE) stop("error",call.=FALSE)
 	 dist.marq 	= 	distance.marqueurs(map)
 
 
-#Contrôle sur les positions de tests et redimensionnement du vecteur de positions de tests en fonction des positions cohérentes
-###############################################################################################################################
-# 1ère vérification: les positions rentrées par l'utilisateur doivent être comprises entre la 1ère marque et la dernière marque
-# Les positions sont dans position.new
-         position=sort(position) #rangement des valeurs de position par ordre croissant
+
+#########################################################
+#  vérification: les positions rentrées par l'utilisateur doivent être 
+#  comprises entre marq.hap.left et nbre.marque-marq.hap.left+1
+#########################################
+         position=sort(position) #rangement 
          position=round(position,5) #Il faut arrondir!
 
-         if (marq.hap.left==1) {dist.marq1=dist.marq}
-         if (marq.hap.left>1) {dist.marq1=dist.marq[-c(1:(marq.hap.left-1),(length(dist.marq)-marq.hap.left+2):length(dist.marq))]}
+    dist.marq1=dist.marq[marq.hap.left:(length(dist.marq)-marq.hap.left+1)]
 
          borne.inf=round(dist.marq1[1],5) #Il faut arrondir!
          borne.sup=round(dist.marq1[length(dist.marq1)],5) #Il faut arrondir!
 
 
          diff.left=position-borne.inf 
-         diff.left
          diff.right=position-borne.sup 
-         diff.right
 
          which=(1:length(position))[(diff.left>=0)&(diff.right<=0)]
          position.new=round(sort(position[which]),5)
-         position.new
+         if ((length(position.new))!=length(position)) stop("error in test positions",call.=FALSE) 
 
-         if ((length(position.new)-marq.hap.left+1)!=length(position)) stop("error in test positions",call.=FALSE) 
 
-# 2nde vérification:les positions rentrées par l'utilisateur doivent être cohérentes avec les colonnes de PLA 
-        if  (dim(PLA)[2]!=length(position.new)) stop("the number of PLA positions is not consistent with the number of test positions",call.=FALSE)
 
 
 # calcul du nombre de positions de tests
@@ -123,15 +118,13 @@ if (perfectLD!=TRUE) stop("error",call.=FALSE)
  	i.pos.PLA	=	0
 
 
-  if(marq.hap.left>1) {
-
-      for(i in 1:(marq.hap.left-1)) {   
-
-         nbre.pas	=	length(dist.test[[i]])
-         i.pos.PLA	=	i.pos.PLA    +   nbre.pas
-
-      }
-   } 
+#  if(marq.hap.left>1) {
+#      for(i in 1:(marq.hap.left-1)) {   
+#         nbre.pas	=	length(dist.test[[i]])
+#         i.pos.PLA	=	i.pos.PLA    +   nbre.pas
+#
+#      }
+#   } 
 
 
     for (i in marq.hap.left:(nbre.int-marq.hap.left+1)) { # Début de la boucle sur les intervalles (FOR1)
@@ -149,7 +142,7 @@ if (perfectLD!=TRUE) stop("error",call.=FALSE)
 
 
     #calcul des structures pour l'intervalle i
-    res.structure	=	structure(marq.hap,nbre.all.marq)
+    res.structure	=	structure.hap(marq.hap,nbre.all.marq)
     pi.hap		=	pi.hap(freq.marq,res.structure)
     cor.chrm1.pere	=	corresp(hap.chrom1.pere[,((i-marq.hap.left)+1):((i-marq.hap.left)+marq.hap)],res.structure)
     cor.chrm2.pere	=	corresp(hap.chrom2.pere[,((i-marq.hap.left)+1):((i-marq.hap.left)+marq.hap)],res.structure)
@@ -195,7 +188,7 @@ if (perfectLD!=TRUE) stop("error",call.=FALSE)
 
                          if(perfectLD==FALSE){
                               start    	= 	c(depart,temps.depart,0.9,0.25,0)
-                              op  	= 	optim(start,obj.LDL.add.alpha,NULL,method="BFGS",lower=-Inf,upper=Inf,control=list(),hessian=FALSE,don)
+#                              op  	= 	optim(start,obj.LDL.add.alpha,NULL,method="BFGS",lower=-Inf,upper=Inf,control=list(),hessian=FALSE,don)
                          }
     
 

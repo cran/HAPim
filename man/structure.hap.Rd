@@ -1,8 +1,8 @@
-\name{corresp}
+\name{structure.hap}
 
-\alias{corresp}
+\alias{structure.hap}
 
-\title{correspondance}
+\title{Structure}
 
 \description{
 The function can be viewed as an internal function. 
@@ -10,19 +10,17 @@ The user does not have to call it by himself.
 }
 
 \usage{
-corresp(hap.o, res.structure)
+structure.hap(nbre.marq, nbre.all.marq)
 }
 
 \arguments{
-  \item{hap.o}{numeric matrix (n x p).}
-  \item{res.structure}{results provided by \code{structure.hap()} function, list of numeric objects.}
+  \item{nbre.marq}{number of markers.}
+  \item{nbre.all.marq}{number of alleles per markers.}
 }
 
 
 \value{
-  A list containing the following components:
-  \item{corresp}{numeric matrix (n x p).}
-  \item{assoc}{numeric vector, associated haplotype}
+The value returned is a list of objects.
 }
 
 \references{
@@ -35,6 +33,5 @@ Combining linkage analysis and linkage disequilibrium for QTL fine mapping in an
 
 \author{S. Dejean, N. Oumouhou, D. Estivals, B. Mangin }
 
-\seealso{\code{\link{structure.hap}} }
-
 \keyword{models}
+

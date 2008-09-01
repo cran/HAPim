@@ -1,8 +1,12 @@
 `hapim.LD.add` <-
 function(hap.trans.pere,hap.trans.mere,perf,CD,map,position,temps.depart,perfectLD,marq.hap.left) {
 
-if (perfectLD !=TRUE) stop("error",call.=FALSE) 
-  	
+# vérification des dimensions:
+#############################
+     if(dim(hap.trans.mere)[2] != dim(hap.trans.pere)[2]  | dim(hap.trans.pere)[2] != (length(map)+1) ) stop("the numbers of genotype information are not consistent in  hap.trans.mere, hap.trans.pere or map ",call.=FALSE)
+
+     if(length(CD) != length(perf) | length(perf) != dim(hap.trans.mere)[1] | dim(hap.trans.mere)[1] != dim(hap.trans.pere)[1]  ) stop("the numbers of individual information are not consistent in CD, perf, hap.trans.pere or hap.trans.mere",call.=FALSE)
+
 #Recodage des haplotypes
 ########################
 	hap.pop       = 	rbind(hap.trans.pere,hap.trans.mere)
@@ -11,6 +15,7 @@ if (perfectLD !=TRUE) stop("error",call.=FALSE)
 	hap.trans.mere= 	recode.hap(hap.trans.mere,all.marq)
 	hap.pop       = 	rbind(hap.trans.pere,hap.trans.mere)
 
+  	
 #Calcul du nombre d'intervalles
 ###############################
 	nbre.int	= 	length(map) 
@@ -27,30 +32,30 @@ if (perfectLD !=TRUE) stop("error",call.=FALSE)
 	 dist.marq 	= 	distance.marqueurs(map)
 
 
-#Contrôle sur les positions de tests et redimensionnement du vecteur de positions de tests en fonction des positions cohérentes
-###############################################################################################################################
-# 1ère vérification: les positions rentrées par l'utilisateur doivent être comprises entre la 1ère marque et la dernière marque
-# Les positions sont dans position.new
-         position=sort(position) #rangement des valeurs de position par ordre croissant
+
+
+#########################################################
+#  vérification: les positions rentrées par l'utilisateur doivent être 
+#  comprises entre marq.hap.left et nbre.marque-marq.hap.left+1
+#########################################
+         position=sort(position) #rangement 
          position=round(position,5) #Il faut arrondir!
 
-         if (marq.hap.left==1) {dist.marq1=dist.marq}
-         if (marq.hap.left>1) {dist.marq1=dist.marq[-c(1:(marq.hap.left-1),(length(dist.marq)-marq.hap.left+2):length(dist.marq))]}
+    dist.marq1=dist.marq[marq.hap.left:(length(dist.marq)-marq.hap.left+1)]
 
          borne.inf=round(dist.marq1[1],5) #Il faut arrondir!
          borne.sup=round(dist.marq1[length(dist.marq1)],5) #Il faut arrondir!
 
 
          diff.left=position-borne.inf 
-         diff.left
          diff.right=position-borne.sup 
-         diff.right
 
          which=(1:length(position))[(diff.left>=0)&(diff.right<=0)]
          position.new=round(sort(position[which]),5)
-         position.new
+         if ((length(position.new))!=length(position)) stop("error in test positions",call.=FALSE) 
 
-         if ((length(position.new)-marq.hap.left+1)!=length(position)) stop("error in test positions",call.=FALSE) 
+
+
 
 
 #le nombre de positions de tests
@@ -108,7 +113,7 @@ if (perfectLD !=TRUE) stop("error",call.=FALSE)
        } # Fin FOR2
 
    #calcul des structures pour l'intervalle i
-   res.structure	=	structure(marq.hap,nbre.all.marq)
+   res.structure	=	structure.hap(marq.hap,nbre.all.marq)
    pi.hap		=	pi.hap(freq.marq,res.structure)
    cor.pere		=	corresp(hap.trans.pere[,((i-marq.hap.left)+1):((i-marq.hap.left)+marq.hap)],res.structure)
    cor.mere		=	corresp(hap.trans.mere[,((i-marq.hap.left)+1):((i-marq.hap.left)+marq.hap)],res.structure)
@@ -150,7 +155,7 @@ if (perfectLD !=TRUE) stop("error",call.=FALSE)
 
                          if(perfectLD==FALSE){
                               start    	= 	c(param[2],0,temps.depart,0.25,0.5,param[1])
-                              op  	= 	optim(start,obj.LD.add.alpha,NULL,method="BFGS",lower=-Inf,upper=Inf,control=list(),hessian=FALSE,don)
+#                              op  	= 	optim(start,obj.LD.add.alpha,NULL,method="BFGS",lower=-Inf,upper=Inf,control=list(),hessian=FALSE,don)
                          }
    
                          val.par[j,]    =        op$par  

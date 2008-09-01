@@ -1,10 +1,10 @@
 Package:HAPim
 Type: Package
 Title:HapIM
-Version: 1.0
-Date: 2008-07-01
-Author:S.Dejean, N.Oumouhou, D.Estivals, B.Mangin
+Version: 1.2
+Date: 2008-09-01
+Author: S. Dejean, N. Oumouhou, D. Estivals, B. Mangin
 Maintainer:Brigitte Mangin <brigitte.mangin@toulouse.inra.fr>
-Description: The package provides a set of functions whose aim is to propose 4 methods of QTL detection and fine mapping.HAPIM LD is an interval-mapping method designed for unrelated individuals with no family information and is based on a maximum-likelihood calculation.HAPIM LDL is an interval-mapping method which uses family information of individuals and combines linkage and linkage disequilibrium.It is based on a maximum-likelihood calculation.HAPLOMAX gives an analysis of variance with a sire effect and a haplotype effect. HAPLOMAX HS gives an analysis of variance with a sire effect and a haplotype effect in half-sire design.
+Description:  The package provides a set of functions whose aim is to propose 4 methods of QTL detection. HAPimLD is an interval-mapping method designed for unrelated individuals with no family information that makes use of linkage disequilibrium. HAPimLDL is an interval-mapping method for design of half-sib families. It combines linkage analysis and linkage disequilibrium. HaploMax is  based on an analysis of variance with a dose haplotype effect. HaploMaxHS is based on an analysis of variance with a sire effect and a dose haplotype effect in half-sib family design.   Fundings for the package development were provided to the LDLmapQTL project by the ANR GENANIMAL program and APIS-GENE.
 License: GPL
-Packaged: Mon Jul  7 09:15:08 2008; sdejean
+Packaged: Mon Aug 25 15:12:59 2008; mangin

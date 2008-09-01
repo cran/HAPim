@@ -1,4 +1,4 @@
-`structure` <-
+`structure.hap` <-
 function(nbre.marq,nbre.all.marq){
 nbre.type=2^nbre.marq
 nbre.hap=prod(nbre.all.marq)

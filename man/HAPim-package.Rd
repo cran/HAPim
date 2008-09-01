@@ -11,15 +11,15 @@
 \description{
 The package provides a set of functions whose aim is to propose 4 methods of QTL detection:
 
--HAPim LD is an interval-mapping method designed for unrelated individuals 
-with no family information and is based on a maximum-likelihood calculation.
+-HAPimLD is an interval-mapping method designed for unrelated individuals 
+with no family information that makes use of linkage disequilibrium.
 
--HAPim LDL is an interval-mapping method which uses family information of individuals and 
-combines linkage and linkage disequilibrium.It is based on a maximum-likelihood calculation.
+-HAPimLDL is an interval-mapping method for design of half-sib families. It 
+combines linkage analysis and linkage disequilibrium.
 
--Haplomax gives an analysis of variance with a sire effect and a haplotype effect. 
+-HaploMax is  based on an analysis of variance with a dose haplotype effect. 
 
--Haplomax HS gives an analysis of variance with a sire effect and a haplotype effect in half-sire design.
+-HaploMaxHS is based on an analysis of variance with a sire effect and a dose haplotype effect in half-sib family design.
 
 Fundings for the package development were provided to the LDLmapQTL project by the ANR GENANIMAL program and APIS-GENE.
 
@@ -30,17 +30,19 @@ Fundings for the package development were provided to the LDLmapQTL project by t
 \tabular{ll}{
 Package: \tab HAPim\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2008-05-28\cr
+Version: \tab 1.2\cr
+Date: \tab 2008-08-25\cr
 License: \tab none\cr
 }
 }
 
 \author{S. Dejean, N. Oumouhou, D. Estivals, B. Mangin 
 
- Maintainer: Brigitte Mangin <brigitte.mangin@toulouse.inra.fr> }
+Maintainer: Brigitte Mangin <brigitte.mangin@toulouse.inra.fr> }
 
-\references{publication}
+\references{publication to be submitted: C. Cierco-Ayrolles, S. Dejean, A. Legarra, H. Gilbert,
+T. Druet, F. Ytournel, D. Estivals, N. Oumouhou and B. Mangin.
+Combining linkage analysis and linkage disequilibrium for QTL fine mapping in animal pedigrees.}
 
 
 \keyword{models}

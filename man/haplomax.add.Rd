@@ -2,29 +2,34 @@
 
 \alias{haplomax.add}
 
-\title{HAPLOMAX model}
+\title{HaploMax method in unrelated population}
 
 \description{
-The function gives an analysis of variance with a sire effect and a haplotype effect. 
+The function computes an analysis of variance with a dose haplotype effect. 
 }
 
 \usage{
-haplomax.add(hap.trans.pere, hap.trans.mere, perf, CD, map, position, marq.hap)
+haplomax.add(hap.trans.pere, hap.trans.mere, perf, CD, map, marq.hap)
 }
 
 
 \arguments{
-  \item{hap.trans.pere}{numeric matrix (number of individuals*number of markers)
- which provides, for each individual, the haplotype transmitted by the sire.}
-  \item{hap.trans.mere}{numeric matrix (number of individuals*number of markers) 
-which provides, for each individual, the haplotype transmitted by the dam.}
+  \item{hap.trans.pere}{character matrix (number of individuals x number of markers) 
+which provides, for each individual, the haplotype transmitted by its father.}
+  \item{hap.trans.mere}{character matrix (number of individuals x number of markers) 
+which provides, for each individual, the haplotype transmitted by its mother.}
   \item{perf}{numeric vector of length=number of individuals which contains the performances of individuals.}
-  \item{CD}{numeric vector of length=number of individuals which contains the CD of individuals.}
-  \item{map}{numeric vector of length=(number of markers-1) 
-giving the distance between two consecutive markers on all the chromosome.}
-  \item{position}{numeric vector of test positions.
-   Positions of "position" vector have to be the same as positions of "PLA" matrix.}
-  \item{marq.hap}{number of markers of the reconstructed haplotype.}
+  \item{CD}{numeric vector of length=number of individuals which contains the CD of individuals. var(perf$_i$)=error variance/CD$^2_i$}
+  \item{map}{numeric vector of length=(number of markers-1) which contains the distance in Morgan between two consecutive markers on the chromosome.}
+  \item{marq.hap}{number of markers of the mutated haplotype}
+}
+
+\details{
+Individual information have to be ranged in the same order in hap.trans.mere, hap.trans.pere, perf, CD.
+
+All distances are assumed to be Haldame's distance in Morgan.
+
+Test positions are located on the middles of marq.hap marker sliding windows.
 }
 
 
@@ -35,16 +40,19 @@ The value returned is a data frame which contains 5 columns:
 
 -Value of Fisher test 
 
--Reconstructed haplotype coded with letters
+-Mutated (i.e. associated to Q allele) haplotype 
 
--Estimation of the variance of the error
+-Estimate of the error variance 
 
--Estimation of the QTL effect 
+-Estimate of the Q allele effect 
+
 }
 
-\references{publication to be submitted:C.Cierco-Ayrolles,S.Dejean,A.Legarra,H.Gilbert,
-T.Druet,F.Ytournel,D.Estivals,N.Oumouhou and B.Mangin,
+\references{
+publication to be submitted: C. Cierco-Ayrolles, S. Dejean, A. Legarra, H. Gilbert,
+T. Druet, F. Ytournel, D. Estivals, N. Oumouhou and B. Mangin.
 Combining linkage analysis and linkage disequilibrium for QTL fine mapping in animal pedigrees.}
+
 
 \author{S. Dejean, N. Oumouhou, D. Estivals, B. Mangin }
 
@@ -57,23 +65,12 @@ hap.trans.pere=data.test[[3]]
 perf=data.test[[6]]
 CD=data.test[[7]]
 
-########################################################################################
-# warning:positions in "position" vector have to correspond to positions in "PLA" matrix.
-########################################################################################
-# In this example:
-#	-positions test are expressed in Morgan.
-#	-markers are biallelic (SNPs).
-#	-marker positions are : {0, 0.010, 0.020, 0.030, 0.040, 0.050, 0.060, 0.070, 0.080, 0.090 }. 
-# We want to test the presence/absence of a QTL between 2 consecutive markers.
-# Transmission probabilities are calculated for the middle of each interval between 2 consecutive markers.
-# So, positions of "position" vector are as follow:
-
-position=c(0.005,0.015,0.025,0.035,0.045,0.055,0.065,0.075,0.085)
-
-# we use a 2 markers-reconstructed haplotype
+# In this example,marker positions are: {0, 0.010, 0.020, 0.030, 0.040, 0.050, 0.060, 
+# 0.070, 0.080, 0.090 }. 
+# we use a 2 markers-associated haplotype.
 marq.hap=2
 
-haplomax=haplomax.add(hap.trans.pere,hap.trans.mere,perf,CD,map,position,marq.hap)
+haplomax=haplomax.add(hap.trans.pere,hap.trans.mere,perf,CD,map, marq.hap)
 
 haplomax
 
