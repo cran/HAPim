@@ -17,15 +17,24 @@ Data are prepared for a QTL detection in the middle of each marker intervalle.
 
 \format{
   A list containing the following components:
-  \item \code{map}: vector (9) with numerical values
-  \item \code{hap.trans.mere}: matrix (50 x 10) with character values 
-  \item \code{hap.trans.pere}: matrix (50 x 10) with character values 
-  \item \code{hap.chrom1.pere}: matrix (5 x 10) with character values 
-  \item \code{hap.chrom2.pere}: matrix (5 x 10) with character values 
-  \item \code{perf}: vector (50) with numerical values
-  \item \code{CD}: vector (50) with numerical values
-  \item \code{PLA}: matrix (50 x 9) with numerical values
-  \item \code{genea}: matrix (50 x 2) with numerical values
+
+ - \code{map}: vector (9) with numerical values
+
+ - \code{hap.trans.mere}: matrix (50 x 10) with character values 
+
+ - \code{hap.trans.pere}: matrix (50 x 10) with character values 
+
+ - \code{hap.chrom1.pere}: matrix (5 x 10) with character values 
+
+ - \code{hap.chrom2.pere}: matrix (5 x 10) with character values 
+
+ - \code{perf}: vector (50) with numerical values
+ 
+ - \code{CD}: vector (50) with numerical values
+
+ - \code{PLA}: matrix (50 x 9) with numerical values
+
+ - \code{genea}: matrix (50 x 2) with numerical values
 }
 
 \examples{

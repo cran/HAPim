@@ -31,7 +31,7 @@ which contains the progeny index and its father index.}
   \item{PLA}{numeric matrix (number of individuals x number of test positions)
  which contains transmission probabilities i.e probability that the progeny receives the first chromosome from its father at the test positions given marker information,
 see J.-M. Elsen, B. Mangin, B. Goffinet, D. Boichard, P. Le Roy.
-Alternative models for QTL detection in livestock. I. General introduction. {\it Genet. Sel. Evol.} 31 (1999) 213-224.}
+Alternative models for QTL detection in livestock. I. General introduction. Genet. Sel. Evol. 31 (1999) 213-224.}
   \item{map}{numeric vector of length=(number of markers-1) which contains the distance in Morgan between two consecutive markers on the chromosome.}
   \item{position}{numeric vector which contains the distance in Morgan of test positions from the beginning of the chromosome (first marker).}
   \item{temps.depart}{numeric value which provides a start value for the evolution  time of the population.}

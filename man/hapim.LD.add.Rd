@@ -57,7 +57,7 @@ The returned value  is a data frame which contains 8 columns:
 }
 
 \references{
-Boitard et al. Linkage disequilibrium interval mapping of quantitative trait loci.{\it BMC Genomics} (2006) 7:54.
+Boitard et al. Linkage disequilibrium interval mapping of quantitative trait loci. BMC Genomics (2006) 7:54.
 
 
 publication to be submitted: C. Cierco-Ayrolles, S. Dejean, A. Legarra, H. Gilbert,

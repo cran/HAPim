@@ -23,7 +23,7 @@ the returned value  is a vector of recombination rates.
 }
 
 \references{
-Haldane, J.B.S. {\it J. Genet.} (1919), 8:299-309.
+Haldane, J.B.S.  J. Genet. (1919), 8:299-309.
 
 publication to be submitted: C. Cierco-Ayrolles, S. Dejean, A. Legarra, H. Gilbert,
 T. Druet, F. Ytournel, D. Estivals, N. Oumouhou and B. Mangin.

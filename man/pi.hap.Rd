@@ -35,6 +35,6 @@ Combining linkage analysis and linkage disequilibrium for QTL fine mapping in an
 
 \author{S. Dejean, N. Oumouhou, D. Estivals, B. Mangin }
 
-\seealso{\code{\link{freq.all}}, {\code{\link{structure.hap}}} }
+\seealso{\code{\link{freq.all}}, \code{\link{structure.hap}} }
 
 \keyword{models}

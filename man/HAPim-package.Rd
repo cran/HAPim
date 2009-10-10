@@ -30,8 +30,8 @@ Fundings for the package development were provided to the LDLmapQTL project by t
 \tabular{ll}{
 Package: \tab HAPim\cr
 Type: \tab Package\cr
-Version: \tab 1.2\cr
-Date: \tab 2008-08-25\cr
+Version: \tab 1.3\cr
+Date: \tab 2009-10-12\cr
 License: \tab none\cr
 }
 }
